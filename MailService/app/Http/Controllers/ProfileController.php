@@ -10,12 +10,24 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
+use App\Models\User;
+use App\Models\Mail;
+
 
 class ProfileController extends Controller
 {
     /**
      * Display the user's profile form.
      */
+    public function dash(Request $request){
+        
+        $mails = Mail::where('reciever_id', Auth()->user()->id)->get();
+
+
+        return Inertia::render('Dashboard', ['mails' => $mails]);
+    }
+
+
     public function edit(Request $request): Response
     {
         return Inertia::render('Profile/Edit', [
