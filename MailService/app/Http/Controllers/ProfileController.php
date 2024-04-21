@@ -24,7 +24,7 @@ class ProfileController extends Controller
         $mails = Mail::where('reciever_id', Auth()->user()->id)->get();
 
 
-        return Inertia::render('Dashboard', ['mails' => $mails]);
+        return Inertia::render('Inbox', ['mails' => $mails]);
     }
 
 

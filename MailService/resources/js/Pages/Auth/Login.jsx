@@ -28,7 +28,7 @@ export default function Login({ status, canResetPassword }) {
 
     return (
         <GuestLayout>
-            <div className="text-center text-2xl"> Prijava</div>
+            <div className="text-center text-2xl"> Log in</div>
             <br />
             <Head title="Log in" />
 
@@ -82,7 +82,7 @@ export default function Login({ status, canResetPassword }) {
                             }
                         />
                         <span className="ms-2 text-sm text-gray-600">
-                            Zapamti me
+                            Remember me
                         </span>
                     </label>
                 </div>
@@ -93,15 +93,15 @@ export default function Login({ status, canResetPassword }) {
                             href={route("password.request")}
                             className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
-                            Zaboravljena lozinka?
+                            Forgot password?
                         </Link>
                     )}
 
                     <PrimaryButton
-                        className="object-left"
+                        className="object-left ml-2"
                         disabled={processing}
                     >
-                        Prijavi se
+                        Log in
                     </PrimaryButton>
                 </div>
             </form>

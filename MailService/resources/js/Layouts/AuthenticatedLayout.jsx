@@ -31,12 +31,12 @@ export default function Authenticated({ user, header, children }) {
 
                         <div className="hidden sm:flex sm:items-center sm:ms-6">
                             <div className="ms-3 relative">
-                                <Dropdown>
+                                <Dropdown >
                                     <Dropdown.Trigger>
                                         <span className="inline-flex rounded-md">
                                             <button
                                                 type="button"
-                                                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
+                                                className="inline-flex items-center px-3 py-2 border border-transparent text-lg leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
                                             >
                                                 {user.name}
 
@@ -120,6 +120,30 @@ export default function Authenticated({ user, header, children }) {
                     <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">{header}</div>
                 </header>
             )}
+
+                    <nav className="bg-white p-4 rounded-lg shadow-md ">
+                            <ul className="flex space-x-8 items-center justify-center">
+                                <li className=' rounded-lg p-2'>
+                                   <form action="/inbox" method="GET"> <button className="hover:text-gray-600 hover:scale-110 text-gray-900 font-semibold">Inbox</button></form>
+                                </li>
+
+                                <li className=' rounded-lg p-2'>
+                                   <form action="/sent" method="GET"> <button className="hover:text-gray-600 hover:scale-110 text-gray-900 font-semibold">Sent</button></form>
+                                </li>
+
+                                <li className=' rounded-lg p-2'>
+                                   <form action="/junk" method="GET"> <button className="hover:text-gray-600 hover:scale-110 text-gray-900 font-semibold">Junk</button></form>
+                                </li>
+
+                                <li className=' rounded-lg p-2'>
+                                   <form action="/trash" method="GET"> <button className="hover:text-gray-600 hover:scale-110 text-gray-900 font-semibold">Trash</button></form>
+                                </li>
+
+                                <li className='bg-green-300 rounded-lg p-2'>
+                                   <form action="/newmail" method="GET"> <button className="hover:text-gray-600 hover:scale-110 text-gray-900 font-semibold">New mail</button></form>
+                                </li>
+                            </ul>
+                        </nav>
 
             <main>{children}</main>
         </div>
