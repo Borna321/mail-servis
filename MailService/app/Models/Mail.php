@@ -13,6 +13,6 @@ class Mail extends Model
         'body',
         'sender_id',
         'reciever_id',
-        'reciever_mail',
+        'sender_mail',
     ];
 }

@@ -139,8 +139,8 @@ export default function Authenticated({ user, header, children }) {
                                    <form action="/trash" method="GET"> <button className="hover:text-gray-600 hover:scale-110 text-gray-900 font-semibold">Trash</button></form>
                                 </li>
 
-                                <li className='bg-green-300 rounded-lg p-2'>
-                                   <form action="/newmail" method="GET"> <button className="hover:text-gray-600 hover:scale-110 text-gray-900 font-semibold">New mail</button></form>
+                                <li className='bg-green-300 rounded-lg p-2 hover:scale-110'>
+                                   <form action="/newmail" method="GET"> <button className="hover:text-gray-600  text-gray-900 font-semibold">New mail</button></form>
                                 </li>
                             </ul>
                         </nav>

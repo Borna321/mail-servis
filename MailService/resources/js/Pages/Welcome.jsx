@@ -26,13 +26,13 @@ export default function Welcome({ auth }) {
                                 href={route("login")}
                                 className=" font-semibold sm:fixed sm:top-2 sm:right-44 p-6 text-end transform scale-150  text-blue-950 hover:text-gray-500 dark:text-blue-950 dark:hover:text-blue "
                             >
-                                Prijava
+                                Log in
                             </Link>
                             <Link
                                 href={route("register")}
                                 className="font-semibold sm:fixed sm:top-2 sm:right-10 p-6 text-end transform scale-150 ms-4  text-blue-950 hover:text-gray-500 dark:text-blue-950 dark:hover:text-blue "
                             >
-                                Registracija
+                                Sign up
                             </Link>
                         </>
                     )}
