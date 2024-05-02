@@ -1,4 +1,4 @@
-import logo from "c:/Users/edico/MailService/resources/images/logo.png";
+import logo from "../../images/logo.png";
 
 
 export default function Guest({ children }) {
