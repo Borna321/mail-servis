@@ -1,5 +1,5 @@
-import { Link, Head } from "@inertiajs/react";
-import logo from "c:/Users/edico/MailService/resources/images/logo.png";
+import { Link, Head } from "@inertiajs/react"
+import logo from "../../images/logo.png";
 
 export default function Welcome({ auth }) {
     return (
