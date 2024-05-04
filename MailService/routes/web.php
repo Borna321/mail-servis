@@ -28,6 +28,9 @@ Route::get('/newmail', [MailController::class, 'newmail'])->middleware(['auth', 
 //sending mail
 Route::get('/addmail', [MailController::class, 'addmail'])->middleware(['auth', 'verified'])->name('addmail');
 
+//deleting mail
+Route::post('/delete_mail', [MailController::class, 'delete'])->middleware(['auth', 'verified'])->name('delete_mail');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

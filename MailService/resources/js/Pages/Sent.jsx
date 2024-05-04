@@ -1,7 +1,21 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
+import SecondaryButton from "@/Components/SecondaryButton";
+import {useForm } from "@inertiajs/react";
 
 export default function Sent({ auth, mails, users }) {
+    
+
+    const {post} = useForm({
+    });
+
+
+    const delete_mail = (e) => {
+        e.preventDefault();
+
+        post(route("delete_mail"));
+    };
+
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -25,6 +39,8 @@ export default function Sent({ auth, mails, users }) {
                                     }
                                 })}
                             </div>
+                            <SecondaryButton className="ml-auto bg-red-500 hover:bg-red-600 " onClick={delete_mail}>Delete</SecondaryButton>
+
                         </div>
                     ))}
                   
