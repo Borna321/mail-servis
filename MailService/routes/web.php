@@ -29,7 +29,8 @@ Route::get('/newmail', [MailController::class, 'newmail'])->middleware(['auth', 
 Route::get('/addmail', [MailController::class, 'addmail'])->middleware(['auth', 'verified'])->name('addmail');
 
 //deleting mail
-Route::post('/delete_mail', [MailController::class, 'delete'])->middleware(['auth', 'verified'])->name('delete_mail');
+Route::get('/delete_sender_mail', [MailController::class, 'delete_sender_mail'])->middleware(['auth', 'verified'])->name('delete_sender_mail');
+Route::get('/delete_reciever_mail', [MailController::class, 'delete_reciever_mail'])->middleware(['auth', 'verified'])->name('delete_reciever_mail');
 
 
 Route::middleware('auth')->group(function () {
