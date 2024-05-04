@@ -19,6 +19,10 @@ return new class extends Migration
             $table->foreignId('sender_id');
             $table->foreignId('reciever_id');
             $table->string('sender_mail');
+            $table->boolean('sender_deleted')->default(0);
+            $table->boolean('reciever_deleted')->default(0); 
+            $table->boolean('trash')->default(0); 
+            
 
         });
     }
