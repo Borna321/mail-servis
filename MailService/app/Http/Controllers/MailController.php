@@ -18,6 +18,7 @@ class MailController extends Controller
         
         $mails = Mail::where('reciever_id', auth()->user()->id)
              ->where('reciever_deleted', 0)
+             ->where('trash', 0)
              ->get();
 
 
@@ -42,7 +43,11 @@ class MailController extends Controller
 
     public function trash(Request $request){
         
-        return Inertia::render('Trash');
+        $mails = Mail::where('trash', true)->get();
+
+        
+        return Inertia::render('Trash', ['mails' => $mails]);
+        
     }
 
     public function newmail(Request $request){
@@ -86,7 +91,7 @@ class MailController extends Controller
         $mail->sender_deleted = 1;
         $mail->save();
         
-        if($mail->sender_deleted && $mail->reciever_deleted) $mail->delete();
+        if($mail->sender_deleted && $mail->reciever_deleted && !$mail->trash) $mail->delete();
         
 
         return redirect('/sent');
@@ -100,11 +105,48 @@ class MailController extends Controller
         $mail->reciever_deleted = 1;
         $mail->save();
         
-        if($mail->sender_deleted && $mail->reciever_deleted) $mail->delete();
+        if($mail->sender_deleted && $mail->reciever_deleted && !$mail->trash) $mail->delete();
         
 
         return redirect('/inbox');
 
     }
+
+    
+    public function move_to_trash(Request $request){
+        
+
+        $mail = Mail::find($request->mailId);
+        $mail->trash = 1;
+        $mail->save();
+        
+        //if($mail->sender_deleted && $mail->reciever_deleted && !$mail->trash) $mail->delete();
+        $mails = Mail::where('trash', true)->get();
+
+        //return redirect('/trash');
+        return Inertia::render('Trash', ['mails' => $mails]);
+
+    }
+
+    
+    public function delete_from_trash(Request $request){
+        
+
+        $mail = Mail::find($request->mailId);
+        $mail->trash = 0;
+        $mail->reciever_deleted = 1;
+        $mail->save();
+        
+        //if($mail->sender_deleted && $mail->reciever_deleted && !$mail->trash) $mail->delete();
+        $mails = Mail::where('trash', true)->get();
+
+        if($mail->sender_deleted && $mail->reciever_deleted && !$mail->trash) $mail->delete();
+
+        //return redirect('/trash');
+        return Inertia::render('Trash', ['mails' => $mails]);
+
+    }
+
+
     
 }

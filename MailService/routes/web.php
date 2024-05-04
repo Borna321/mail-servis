@@ -32,6 +32,9 @@ Route::get('/addmail', [MailController::class, 'addmail'])->middleware(['auth', 
 Route::get('/delete_sender_mail', [MailController::class, 'delete_sender_mail'])->middleware(['auth', 'verified'])->name('delete_sender_mail');
 Route::get('/delete_reciever_mail', [MailController::class, 'delete_reciever_mail'])->middleware(['auth', 'verified'])->name('delete_reciever_mail');
 
+//trash
+Route::get('/move_to_trash', [MailController::class, 'move_to_trash'])->middleware(['auth', 'verified'])->name('move_to_trash');
+Route::get('/delete_from_trash', [MailController::class, 'delete_from_trash'])->middleware(['auth', 'verified'])->name('delete_from_trash');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
