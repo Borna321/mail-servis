@@ -147,6 +147,19 @@ class MailController extends Controller
 
     }
 
+    public function open_mail(Request $request){
+
+        $income = $request->validate([
+            'id' => 'required',
+        ]);
+
+        $mail_id = intval($request->id);
+
+        $mail = Mail::find($mail_id);
+
+        return Inertia::render('OpenMail', ['mail'=> $mail]);
+
+    }
 
     
 }
