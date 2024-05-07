@@ -1,7 +1,13 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
+import PrimaryButton from "@/Components/PrimaryButton";
+import {useForm } from "@inertiajs/react";
+
 
 export default function Sent({ auth, mails, users }) {
+    
+
+
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -26,6 +32,12 @@ export default function Sent({ auth, mails, users }) {
                                     }
                                 })}
                             </div>
+                            
+                            
+                            <form  className="ml-auto" action="/delete_sender_mail" method="GET">
+                            <input type="hidden" name="mailId" value={mail.id} required class='ml-14 rounded-lg sr-only'/>
+                            <PrimaryButton className="ml-auto bg-red-500 hover:bg-red-600 " >Delete</PrimaryButton>
+                            </form>
                         </div>
                     ))}
 
