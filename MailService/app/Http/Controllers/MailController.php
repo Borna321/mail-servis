@@ -147,7 +147,7 @@ class MailController extends Controller
 
     }
 
-    public function open_mail(Request $request){
+    public function open_mail_inbox(Request $request){
 
         $income = $request->validate([
             'id' => 'required',
@@ -157,7 +157,53 @@ class MailController extends Controller
 
         $mail = Mail::find($mail_id);
 
-        return Inertia::render('OpenMail', ['mail'=> $mail]);
+        return Inertia::render('OpenMail', ['mail'=> $mail, 'inbox_or_sent' => true]);
+
+    }
+
+    public function open_mail_sent(Request $request){
+
+        $income = $request->validate([
+            'id' => 'required',
+        ]);
+
+        $mail_id = intval($request->id);
+
+        $mail = Mail::find($mail_id);
+
+        return Inertia::render('OpenMail', ['mail'=> $mail, 'inbox_or_sent' => false]);
+
+    }
+
+
+
+    public function reply(Request $request){
+
+        $income = $request->validate([
+            'id' => 'required',
+        ]);
+
+        $mail_id = intval($request->id);
+
+        $mail = Mail::find($mail_id);
+
+
+        return Inertia::render('NewMail', ['mail_reply'=> $mail]);
+
+    }
+
+    public function forward(Request $request){
+
+        $income = $request->validate([
+            'id' => 'required',
+        ]);
+
+        $mail_id = intval($request->id);
+
+        $mail = Mail::find($mail_id);
+
+
+        return Inertia::render('NewMail', ['mail_forward'=> $mail]);
 
     }
 

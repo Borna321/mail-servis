@@ -16,7 +16,7 @@ export default function Inbox({ auth, mails }) {
         const param = new URLSearchParams();
         param.append('id', mail_id);
 
-        const url = route("open_mail") + '?' + param.toString();
+        const url = route("open_mail_inbox") + '?' + param.toString();
 
         get(url);
 
@@ -32,7 +32,7 @@ export default function Inbox({ auth, mails }) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
                     {mails.map((mail, i) =>(
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-4 flex p-6 text-gray-900" key={i} onClick={() => openMail(mail.id)}>
+                    <div className="bg-white  hover:bg-gray-200 overflow-hidden shadow-sm sm:rounded-lg mt-4 flex p-6 text-gray-900" key={i} onClick={() => openMail(mail.id)}>
                         <div className='w-1/4 '>{i+1}. Sender: <b>{mail.sender_mail}</b></div> <div>Title: <b>{mail.title}</b> </div>
 
 
