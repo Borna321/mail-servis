@@ -21,6 +21,7 @@ Route::get('/dashboard', [ProfileController::class, 'dash'])->name('dashboard');
 // navigation bar routes
 Route::get('/inbox', [MailController::class, 'inbox'])->middleware(['auth', 'verified'])->name('inbox');
 Route::get('/sent', [MailController::class, 'sent'])->middleware(['auth', 'verified'])->name('sent');
+Route::get('/sent_detailed', [MailController::class, 'sent_detailed'])->middleware(['auth', 'verified'])->name('sent_detailed')
 Route::get('/junk', [MailController::class, 'junk'])->middleware(['auth', 'verified'])->name('junk');
 Route::get('/trash', [MailController::class, 'trash'])->middleware(['auth', 'verified'])->name('trash');
 Route::get('/newmail', [MailController::class, 'newmail'])->middleware(['auth', 'verified'])->name('newmail');
