@@ -81,7 +81,9 @@ class MailController extends Controller
 
                     Mail::Create($income);
         
-        return Inertia::render('NewMail');
+        
+                return redirect('/newmail');
+                //return Inertia::render('NewMail');
     }
 
     public function delete_sender_mail(Request $request){
@@ -123,8 +125,8 @@ class MailController extends Controller
         //if($mail->sender_deleted && $mail->reciever_deleted && !$mail->trash) $mail->delete();
         $mails = Mail::where('trash', true)->get();
 
-        //return redirect('/trash');
-        return Inertia::render('Trash', ['mails' => $mails]);
+        return redirect('/inbox');
+        //return Inertia::render('Inbox');
 
     }
 

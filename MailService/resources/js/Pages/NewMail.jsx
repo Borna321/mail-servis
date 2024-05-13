@@ -1,10 +1,18 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import PrimaryButton from "@/Components/PrimaryButton";
+import {useForm } from "@inertiajs/react";
 
 export default function NewMail({ auth, mail_reply, mail_forward }) {
     
-    
+    const { post } = useForm({});
+
+    const sendMail = (mail_id) => {
+
+
+
+    }
+
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -17,7 +25,7 @@ export default function NewMail({ auth, mail_reply, mail_forward }) {
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-4 flex justify-center items-center">
                        
                         <div className="bg-gray-400 w-3/4 h-auto p-4 rounded-lg shadow-md m-6 ">
-                        <form action="/addmail" method="GET">
+                        <form action="/addmail" method="get">
                                 
                                 <div className="mb-4 flex">
                                     
