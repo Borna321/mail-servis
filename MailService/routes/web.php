@@ -37,7 +37,14 @@ Route::get('/move_to_trash', [MailController::class, 'move_to_trash'])->middlewa
 Route::get('/delete_from_trash', [MailController::class, 'delete_from_trash'])->middleware(['auth', 'verified'])->name('delete_from_trash');
 
 //open mail
-Route::get('/open_mail', [MailController::class, 'open_mail'])->middleware(['auth', 'verified'])->name('open_mail');
+Route::get('/open_mail_inbox', [MailController::class, 'open_mail_inbox'])->middleware(['auth', 'verified'])->name('open_mail_inbox');
+Route::get('/open_mail_sent', [MailController::class, 'open_mail_sent'])->middleware(['auth', 'verified'])->name('open_mail_sent');
+
+//replying mail
+Route::get('/reply', [MailController::class, 'reply'])->middleware(['auth', 'verified'])->name('reply');
+
+//forwarding mail
+Route::get('/forward', [MailController::class, 'forward'])->middleware(['auth', 'verified'])->name('forward');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
