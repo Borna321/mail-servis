@@ -1,10 +1,32 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import PrimaryButton from "@/Components/PrimaryButton";
+import {useForm } from "@inertiajs/react";
 
 export default function NewMail({ auth, mail_reply, mail_forward }) {
     
-    
+    const { post } = useForm({});
+
+    const sendMail = () => {
+
+        const param = new URLSearchParams();
+        param.append('reciever_mail', document.getElementById('reciever_mail').value);
+        param.append('title', document.getElementById('title').value);
+        param.append('body', document.getElementById('body').value);
+
+        const url = route("addmail") + '?' + param.toString();
+         post(url);
+
+        document.getElementById('reciever_mail').value = '';
+        document.getElementById('title').value = '';
+        document.getElementById('body').value = '';
+        //document.getElementById('added').value = '';
+
+        const mainDiv = document.getElementById('gray');
+        mainDiv.insertAdjacentHTML('beforebegin', '<div style=" color: darkblue;  background-color: lightgreen; border-radius: 10px; padding: 10px; display: inline-block;margin-left: 45%" id= "added">Email sent successfully</div>');
+        
+    }
+
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -14,10 +36,10 @@ export default function NewMail({ auth, mail_reply, mail_forward }) {
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                   
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-4 flex justify-center items-center">
+                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-4 flex justify-center items-center" id='gray'>
                        
-                        <div className="bg-gray-400 w-3/4 h-auto p-4 rounded-lg shadow-md m-6 ">
-                        <form action="/addmail" method="GET">
+                        <div className="bg-gray-400 w-3/4 h-auto p-4 rounded-lg shadow-md m-6 " >
+                        <form  onSubmit={(e) => {e.preventDefault(); sendMail();}}>
                                 
                                 <div className="mb-4 flex">
                                     

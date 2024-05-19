@@ -6,7 +6,7 @@ import { useForm } from "@inertiajs/react";
 export default function Inbox({ auth, mails }) {
 
 
-    const { get } = useForm({
+    const { get, delete: destroy, post} = useForm({
 
     });
 
@@ -19,6 +19,34 @@ export default function Inbox({ auth, mails }) {
         const url = route("open_mail_inbox") + '?' + param.toString();
 
         get(url);
+
+    }
+
+    const move_to_trash = (e, mail_id) => {
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        const param = new URLSearchParams();
+        param.append('mailId', mail_id);
+
+        const url = route("move_to_trash") + '?' + param.toString();
+
+        post(url);
+
+    }
+
+    const delete_mail = (e, mail_id) => {
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        const param = new URLSearchParams();
+        param.append('mailId', mail_id);
+
+        const url = route("delete_reciever_mail") + '?' + param.toString();
+
+        destroy(url);
 
     }
 
@@ -37,15 +65,9 @@ export default function Inbox({ auth, mails }) {
 
 
                         <div className='ml-auto flex'>
-                                <form  className="" action="/move_to_trash" method="GET">
-                                    <input type="hidden" name="mailId" value={mail.id} required class='ml-14 rounded-lg sr-only'/>
-                                    <PrimaryButton className="ml-auto bg-yellow-500 hover:bg-yellow-600 " >Move to trash</PrimaryButton>
-                                    </form>
+                                    <PrimaryButton className="ml-auto bg-yellow-500 hover:bg-yellow-600 " onClick={(e) => move_to_trash(e, mail.id)}>Move to trash</PrimaryButton>
 
-                                <form  className="ml-4" action="/delete_reciever_mail" method="GET">
-                                    <input type="hidden" name="mailId" value={mail.id} required class='ml-14 rounded-lg sr-only'/>
-                                    <PrimaryButton className="ml-auto bg-red-500 hover:bg-red-600 " >Delete</PrimaryButton>
-                                    </form>
+                                    <PrimaryButton className="ml-4 bg-red-500 hover:bg-red-600 " onClick={(e) => delete_mail(e, mail.id)}>Delete</PrimaryButton>
                         </div>
                     </div> 
 

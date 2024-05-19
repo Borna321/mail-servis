@@ -6,7 +6,7 @@ import {useForm } from "@inertiajs/react";
 
 export default function Sent({ auth, mails, users }) {
     
-    const { get } = useForm({
+    const { get, delete: destroy } = useForm({
 
     });
 
@@ -19,6 +19,20 @@ export default function Sent({ auth, mails, users }) {
         const url = route("open_mail_sent") + '?' + param.toString();
 
         get(url);
+
+    }
+
+    const delete_mail = (e, mail_id) => {
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        const param = new URLSearchParams();
+        param.append('mailId', mail_id);
+
+        const url = route("delete_sender_mail") + '?' + param.toString();
+
+        destroy(url);
 
     }
 
@@ -46,19 +60,12 @@ export default function Sent({ auth, mails, users }) {
                                 })}
                             </div>
                             
+                            <PrimaryButton className="ml-auto bg-red-500 hover:bg-red-600 " onClick={(e) => delete_mail(e, mail.id)}>Delete</PrimaryButton>
                             
-                            <form  className="ml-auto" action="/delete_sender_mail" method="GET">
-                            <input type="hidden" name="mailId" value={mail.id} required class='ml-14 rounded-lg sr-only'/>
-                            <PrimaryButton className="ml-auto bg-red-500 hover:bg-red-600 " >Delete</PrimaryButton>
-                            </form>
                         </div>
                     ))}
                   
                
-               
-                
-                        
-                   
                 </div>
             </div>
 
