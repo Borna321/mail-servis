@@ -22,6 +22,7 @@ return new class extends Migration
             $table->boolean('sender_deleted')->default(0);
             $table->boolean('reciever_deleted')->default(0); 
             $table->boolean('trash')->default(0); 
+            $table->boolean('junk')->default(0);
             
 
         });

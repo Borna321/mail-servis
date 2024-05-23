@@ -17,5 +17,6 @@ class Mail extends Model
         'sender_deleted',
         'receiver_deleted',
         'trash',
+        'junk'
     ];
 }

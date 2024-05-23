@@ -35,6 +35,7 @@ Route::delete('/delete_reciever_mail', [MailController::class, 'delete_reciever_
 //trash
 Route::post('/move_to_trash', [MailController::class, 'move_to_trash'])->middleware(['auth', 'verified'])->name('move_to_trash');
 Route::delete('/delete_from_trash', [MailController::class, 'delete_from_trash'])->middleware(['auth', 'verified'])->name('delete_from_trash');
+Route::delete('/delete_from_junk', [MailController::class, 'delete_from_junk'])->middleware(['auth', 'verified'])->name('delete_from_junk');
 
 //open mail
 Route::get('/open_mail_inbox', [MailController::class, 'open_mail_inbox'])->middleware(['auth', 'verified'])->name('open_mail_inbox');

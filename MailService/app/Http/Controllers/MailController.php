@@ -12,8 +12,11 @@ use Inertia\Response;
 use App\Models\User;
 use App\Models\Mail;
 
+
 class MailController extends Controller
 {
+
+
     public function inbox(Request $request){
         
         $mails = Mail::where('reciever_id', auth()->user()->id)
@@ -37,13 +40,19 @@ class MailController extends Controller
     }
 
     public function junk(Request $request){
+
+        $mails = Mail::where('junk', true)
+             ->where('reciever_id', Auth::id())
+             ->get();
         
-        return Inertia::render('Junk');
+        return Inertia::render('Junk', ['mails' => $mails]);
     }
 
     public function trash(Request $request){
         
-        $mails = Mail::where('trash', true)->get();
+        $mails = Mail::where('trash', true)
+            ->where('reciever_id', Auth::id())
+             ->get();
 
         
         return Inertia::render('Trash', ['mails' => $mails]);
@@ -56,6 +65,21 @@ class MailController extends Controller
     }
 
     public function addmail(Request $request){
+
+                    $junk_keywords = [
+                        'free',
+                        'click here',
+                        'earn money',
+                        'discount',
+                        'winner',
+                        'investment',
+                        'loan',
+                        'casino',
+                        'limited offer',
+                        'money back',
+                        'risk-free',
+                        'weight loss'
+                    ];
 
 
                     $income = $request->validate([
@@ -76,8 +100,19 @@ class MailController extends Controller
                     $income['sender_id'] = Auth()->user()->id;
                     $income['sender_mail'] = Auth()->user()->email;
 
+                    //function for junk detection
+                    $message = $request->body;
+
+                    $message = strtolower($message);
                     
-                    
+                    foreach($junk_keywords as $keyword) {
+                            if (strpos($message, $keyword) !== false) {
+                                $income['junk'] = true;
+                                break; 
+                            }
+                    }
+
+                   
 
                     Mail::Create($income);
         
@@ -140,12 +175,29 @@ class MailController extends Controller
         $mail->save();
         
         //if($mail->sender_deleted && $mail->reciever_deleted && !$mail->trash) $mail->delete();
-        $mails = Mail::where('trash', true)->get();
+        $mails = Mail::where('trash', true)
+            ->where('reciever_id', Auth::id())
+             ->get();
 
         if($mail->sender_deleted && $mail->reciever_deleted && !$mail->trash) $mail->delete();
 
         //return redirect('/trash');
         return Inertia::render('Trash', ['mails' => $mails]);
+
+    }
+
+    public function delete_from_junk(Request $request){
+        
+
+        $mail = Mail::find($request->mailId);
+        $mail->delete();
+
+        $mails = Mail::where('junk', true)
+             ->where('reciever_id', Auth::id())
+             ->get();
+
+        //return redirect('/trash');
+        return Inertia::render('Junk', ['mails' => $mails]);
 
     }
 
