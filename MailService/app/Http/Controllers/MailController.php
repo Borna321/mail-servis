@@ -11,6 +11,7 @@ use Inertia\Inertia;
 use Inertia\Response;
 use App\Models\User;
 use App\Models\Mail;
+use Illuminate\Support\Facades\Route;
 
 
 class MailController extends Controller
@@ -22,10 +23,12 @@ class MailController extends Controller
         $mails = Mail::where('reciever_id', auth()->user()->id)
              ->where('reciever_deleted', 0)
              ->where('trash', 0)
+             ->where('junk', 0)
              ->get();
 
+        $currentRoute = Route::currentRouteName();
 
-        return Inertia::render('Inbox', ['mails' => $mails]);
+        return Inertia::render('Inbox', ['mails' => $mails,'currentRoute' => $currentRoute]);
     }
 
     public function sent(Request $request){
@@ -35,8 +38,10 @@ class MailController extends Controller
              ->where('sender_deleted', 0)
              ->get();
         $users = User::All();
+
+        $currentRoute = Route::currentRouteName();
        
-        return Inertia::render('Sent', ['mails' => $mails, 'users' => $users]);
+        return Inertia::render('Sent', ['mails' => $mails, 'users' => $users, 'currentRoute' => $currentRoute]);
     }
 
     public function junk(Request $request){
@@ -44,8 +49,10 @@ class MailController extends Controller
         $mails = Mail::where('junk', true)
              ->where('reciever_id', Auth::id())
              ->get();
+
+             $currentRoute = Route::currentRouteName();
         
-        return Inertia::render('Junk', ['mails' => $mails]);
+        return Inertia::render('Junk', ['mails' => $mails, 'currentRoute' => $currentRoute]);
     }
 
     public function trash(Request $request){
@@ -54,14 +61,17 @@ class MailController extends Controller
             ->where('reciever_id', Auth::id())
              ->get();
 
-        
-        return Inertia::render('Trash', ['mails' => $mails]);
+             $currentRoute = Route::currentRouteName();
+
+        return Inertia::render('Trash', ['mails' => $mails, 'currentRoute' => $currentRoute]);
         
     }
 
     public function newmail(Request $request){
+
+        $currentRoute = Route::currentRouteName();
         
-        return Inertia::render('NewMail');
+        return Inertia::render('NewMail', ['currentRoute' => $currentRoute]);
     }
 
     public function addmail(Request $request){
@@ -188,7 +198,6 @@ class MailController extends Controller
 
     public function delete_from_junk(Request $request){
         
-
         $mail = Mail::find($request->mailId);
         $mail->delete();
 
@@ -196,7 +205,20 @@ class MailController extends Controller
              ->where('reciever_id', Auth::id())
              ->get();
 
-        //return redirect('/trash');
+        return Inertia::render('Junk', ['mails' => $mails]);
+
+    }
+
+    public function not_junk(Request $request){
+
+        $mail = Mail::find($request->mailId);
+        $mail->junk = 0;
+        $mail->save();
+
+        $mails = Mail::where('junk', true)
+             ->where('reciever_id', Auth::id())
+             ->get();
+
         return Inertia::render('Junk', ['mails' => $mails]);
 
     }

@@ -3,7 +3,7 @@ import { Head } from '@inertiajs/react';
 import PrimaryButton from "@/Components/PrimaryButton";
 import {useForm } from "@inertiajs/react";
 
-export default function Trash({ auth, mails}) {
+export default function Trash({ auth, mails, currentRoute}) {
     
     const { delete: destroy, get } = useForm({
 
@@ -39,6 +39,7 @@ export default function Trash({ auth, mails}) {
     return (
         <AuthenticatedLayout
             user={auth.user}
+            currentRoute = {currentRoute}
         >
             <Head title="Trash" />
             
