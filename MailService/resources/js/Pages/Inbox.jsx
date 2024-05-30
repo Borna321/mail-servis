@@ -3,7 +3,7 @@ import { Head } from '@inertiajs/react';
 import PrimaryButton from "@/Components/PrimaryButton";
 import { useForm } from "@inertiajs/react";
 
-export default function Inbox({ auth, mails }) {
+export default function Inbox({ auth, mails, currentRoute }) {
 
 
     const { get, delete: destroy, post} = useForm({
@@ -53,6 +53,7 @@ export default function Inbox({ auth, mails }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
+            currentRoute = {currentRoute}
         >
             <Head title="Inbox" />
 
@@ -66,7 +67,7 @@ export default function Inbox({ auth, mails }) {
 
                         <div className='ml-auto flex'>
                                     <PrimaryButton className="ml-auto bg-yellow-500 hover:bg-yellow-600 " onClick={(e) => move_to_trash(e, mail.id)}>Move to trash</PrimaryButton>
-
+                                    
                                     <PrimaryButton className="ml-4 bg-red-500 hover:bg-red-600 " onClick={(e) => delete_mail(e, mail.id)}>Delete</PrimaryButton>
                         </div>
                     </div> 

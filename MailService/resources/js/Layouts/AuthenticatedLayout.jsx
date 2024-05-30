@@ -5,7 +5,7 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link } from '@inertiajs/react';
 import logo from "../../images/logo.png";
 
-export default function Authenticated({ user, header, children }) {
+export default function Authenticated({ user, header, children, currentRoute }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     return (
@@ -123,24 +123,28 @@ export default function Authenticated({ user, header, children }) {
 
                     <nav className="bg-white p-4 rounded-lg shadow-md ">
                             <ul className="flex space-x-8 items-center justify-center">
+                                
+                                
+                          
                                 <li className=' rounded-lg p-2'>
-                                   <form action="/inbox" method="GET"> <button className="hover:text-gray-600 hover:scale-110 text-gray-900 font-semibold">Inbox</button></form>
+                                   <form action="/inbox" method="GET"> <button className={`${currentRoute === 'inbox' ? 'animate-pulse font-bold bg-gray-100 shadow rounded-lg p-1' : 'font-semibold'} hover:text-gray-600 hover:scale-110 text-gray-900 `}>Inbox</button></form>
                                 </li>
 
                                 <li className=' rounded-lg p-2'>
-                                   <form action="/sent" method="GET"> <button className="hover:text-gray-600 hover:scale-110 text-gray-900 font-semibold">Sent</button></form>
+                                   <form action="/sent" method="GET"> <button className={`${currentRoute === 'sent' ? 'animate-pulse font-bold bg-gray-100 shadow rounded-lg p-1' : 'font-semibold'} hover:text-gray-600 hover:scale-110 text-gray-900 `}>Sent</button></form>
                                 </li>
 
                                 <li className=' rounded-lg p-2'>
-                                   <form action="/junk" method="GET"> <button className="hover:text-gray-600 hover:scale-110 text-gray-900 font-semibold">Junk</button></form>
+                                   <form action="/junk" method="GET"> <button className={`${currentRoute === 'junk' ? 'animate-pulse font-bold bg-gray-100 shadow rounded-lg p-1' : 'font-semibold'} hover:text-gray-600 hover:scale-110 text-gray-900 `}>Junk</button></form>
                                 </li>
 
-                                <li className=' rounded-lg p-2'>
-                                   <form action="/trash" method="GET"> <button className="hover:text-gray-600 hover:scale-110 text-gray-900 font-semibold">Trash</button></form>
+                                <li className=' rounded-lg p-2 '>
+                                   <form action="/trash" method="GET"> <button className={`${currentRoute === 'trash' ? 'animate-pulse font-bold bg-gray-100 shadow rounded-lg p-1' : 'font-semibold'} hover:text-gray-600 hover:scale-110 text-gray-900 `}>Trash</button></form>
                                 </li>
 
                                 <li className='bg-green-300 rounded-lg p-2 hover:scale-110'>
-                                   <form action="/newmail" method="GET"> <button className="hover:text-gray-600  text-gray-900 font-semibold">New mail</button></form>
+                                   <form action="/newmail" method="GET"> <button className=
+                                   {`${currentRoute === 'newmail' ? 'animate-pulse text-lg font-extrabold' : 'font-semibold'} hover:text-gray-600 text-gray-900 `}>New mail</button></form>
                                 </li>
                             </ul>
                         </nav>

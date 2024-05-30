@@ -3,33 +3,44 @@ import { Head } from '@inertiajs/react';
 import PrimaryButton from "@/Components/PrimaryButton";
 import {useForm } from "@inertiajs/react";
 
-export default function NewMail({ auth, mail_reply, mail_forward }) {
+export default function NewMail({ auth, mail_reply, mail_forward, currentRoute }) {
     
     const { post } = useForm({});
 
     const sendMail = () => {
-
         const param = new URLSearchParams();
         param.append('reciever_mail', document.getElementById('reciever_mail').value);
         param.append('title', document.getElementById('title').value);
         param.append('body', document.getElementById('body').value);
-
+    
         const url = route("addmail") + '?' + param.toString();
-         post(url);
-
+        post(url);
+    
         document.getElementById('reciever_mail').value = '';
         document.getElementById('title').value = '';
         document.getElementById('body').value = '';
-        //document.getElementById('added').value = '';
-
-        const mainDiv = document.getElementById('gray');
-        mainDiv.insertAdjacentHTML('beforebegin', '<div style=" color: darkblue;  background-color: lightgreen; border-radius: 10px; padding: 10px; display: inline-block;margin-left: 45%" id= "added">Email sent successfully</div>');
+    
+        const message = document.createElement('div');
+        message.style.color = 'darkblue';
+        message.style.backgroundColor = 'lightgreen';
+        message.style.borderRadius = '10px';
+        message.style.padding = '10px';
+        message.style.display = 'inline-block';
+        message.style.marginLeft = '45%';
+        message.textContent = 'Email sent successfully';
         
+        const message1 = document.getElementById('gray');
+        message1.insertAdjacentElement('beforebegin', message);
+    
+        setTimeout(() => {
+            message.remove();
+        }, 1000);
     }
 
     return (
         <AuthenticatedLayout
             user={auth.user}
+            currentRoute = {currentRoute}
         >
             <Head title="New Mail" />
 

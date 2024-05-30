@@ -4,7 +4,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import {useForm } from "@inertiajs/react";
 
 
-export default function Sent({ auth, mails, users }) {
+export default function Sent({ auth, mails, users, currentRoute }) {
     
     const { get, delete: destroy } = useForm({
 
@@ -39,6 +39,7 @@ export default function Sent({ auth, mails, users }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
+            currentRoute = {currentRoute}
         >
             <Head title="Sent" />
             <div className="py-12">
