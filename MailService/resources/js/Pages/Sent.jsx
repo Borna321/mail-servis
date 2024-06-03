@@ -61,7 +61,7 @@ export default function Sent({ auth, mails, users, currentRoute }) {
                                 })}
                             </div>
                             
-                            <PrimaryButton className="ml-auto bg-red-500 hover:bg-red-600 " onClick={(e) => delete_mail(e, mail.id)}>Delete</PrimaryButton>
+                            <PrimaryButton className="ml-auto bg-red-500 hover:bg-red-600 " onClick={(e) => delete_mail(e, mail.id)}>Delete for me</PrimaryButton>
                             
                         </div>
                     ))}

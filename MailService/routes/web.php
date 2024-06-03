@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 // route invoked by log in
-Route::get('/dashboard', [ProfileController::class, 'dash'])->name('dashboard');
+Route::get('/dashboard', [MailController::class, 'inbox'])->name('dashboard');
 
 // navigation bar routes
 Route::get('/inbox', [MailController::class, 'inbox'])->middleware(['auth', 'verified'])->name('inbox');
